@@ -32,10 +32,7 @@ jobs:
         uses: microsoft/setup-msbuild@v1.1
         with:
           vs-prerelease: true
-      - name: Get bootstrappers
-        working-directory: ${{github.workspace}}
-        run: wget https://aka.ms/vs/17/release/vs_enterprise.exe
-
+      
       - name: Run bootstrappers
         working-directory: ${{github.workspace}}
         run: vs_enterprise.exe
