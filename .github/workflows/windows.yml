@@ -32,6 +32,13 @@ jobs:
         uses: microsoft/setup-msbuild@v1.1
         with:
           vs-prerelease: true
+      - name: Get bootstrappers
+        working-directory: ${{github.workspace}}
+        run: wget https://aka.ms/vs/17/release/vs_enterprise.exe
+
+      - name: Run bootstrappers
+        working-directory: ${{github.workspace}}
+        run: vs_enterprise.exe
 
       - name: Configure CMake
         run: cmake -DCMAKE_BUILD_TYPE=${{ matrix.mode }} -DENABLE_SSL=${{matrix.ssl}} -G Ninja -B ${{github.workspace}}/build
