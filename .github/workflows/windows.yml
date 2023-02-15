@@ -23,10 +23,19 @@ jobs:
       - name: Install ninja-build tool
         uses: seanmiddleditch/gha-setup-ninja@v3
 
-      - name: Enable Developer Command Prompt
-        uses: ilammy/msvc-dev-cmd@v1.12.0
+      - name: Setup msvc dev
+        uses: TheMrMilchmann/setup-msvc-dev@v2
         with:
           arch: ${{ matrix.arch }}
+
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
+        with:
+          vs-prerelease: true
+      
+      - name: Run bootstrappers
+        working-directory: ${{github.workspace}}
+        run: ./vs_enterprise.exe
 
       - name: Configure CMake
         run: cmake -DCMAKE_BUILD_TYPE=${{ matrix.mode }} -DENABLE_SSL=${{matrix.ssl}} -G Ninja -B ${{github.workspace}}/build
