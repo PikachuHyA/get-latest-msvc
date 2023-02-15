@@ -23,12 +23,6 @@ jobs:
       - name: Install ninja-build tool
         uses: seanmiddleditch/gha-setup-ninja@v3
 
-      - name: Add msbuild to PATH
-        uses: microsoft/setup-msbuild@v1.1
-        with:
-          vs-version: '[19.4, 19.5)'
-          msbuild-architecture: ${{ matrix.arch }}
-
       - name: Configure CMake
         run: cmake -DCMAKE_BUILD_TYPE=${{ matrix.mode }} -DENABLE_SSL=${{matrix.ssl}} -G Ninja -B ${{github.workspace}}/build
 
