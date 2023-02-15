@@ -23,6 +23,11 @@ jobs:
       - name: Install ninja-build tool
         uses: seanmiddleditch/gha-setup-ninja@v3
 
+      - name: Setup msvc dev
+        uses: TheMrMilchmann/setup-msvc-dev@v2
+        with:
+          arch: ${{ matrix.arch }}
+
       - name: Configure CMake
         run: cmake -DCMAKE_BUILD_TYPE=${{ matrix.mode }} -DENABLE_SSL=${{matrix.ssl}} -G Ninja -B ${{github.workspace}}/build
 
